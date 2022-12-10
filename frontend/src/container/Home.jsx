@@ -9,15 +9,15 @@ import {client} from "../client";
 import Pins from "./Pins";
 import logo from "../assets/logo.png";
 import { userQuery } from "../utills/data";
+import { fetchUser } from '../utills/fetchUser';
 
 
 const Home = () => {
   const [ToggleSidebar,setToggleSidebar] = useState(false);
   const [user,setUser] = useState(null);
   const scrollRef = useRef(null);
+  const userInfo = fetchUser();
 
-  const userInfo = localStorage.getItem('user') !== "undefined" ? JSON.parse(localStorage.getItem('user')) : localStorage.clear();
-  
   useEffect( () =>{
     const query = userQuery(userInfo?.googleId);
     client.fetch(query)
